@@ -6,7 +6,8 @@ import java.util.*
 
 object DataService {
 
-//Want an immutable array.
+
+
     val categories = listOf(
             Category("SHIRTS", "shirtimage"),
             Category("HOODIES", "hoodieimage"),
