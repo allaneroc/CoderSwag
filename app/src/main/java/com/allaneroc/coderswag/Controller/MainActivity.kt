@@ -1,5 +1,6 @@
 package com.allaneroc.coderswag.Controller
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.allaneroc.coderswag.Adapters.CategoryRecycleAdapter
 import com.allaneroc.coderswag.Model.Category
 import com.allaneroc.coderswag.R
 import com.allaneroc.coderswag.Services.DataService
+import com.allaneroc.coderswag.Utilities.EXTRA_CATEGORY
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +32,11 @@ class MainActivity : AppCompatActivity() {
 //        adapter = CategoryAdapter(this, DataService.categories)
 
 //Changed above into:
-        adapter = CategoryRecycleAdapter(this, DataService.categories)
+        adapter = CategoryRecycleAdapter(this, DataService.categories) { category ->
+            val productIntent = Intent(this, ProductsActivity::class.java)
+            productIntent.putExtra(EXTRA_CATEGORY, category.title)
+            startActivity(productIntent)
+        }
 
 //Set adapter for categoryListView equal to the adapter that we just created.
         categoryListView.adapter = adapter
@@ -46,5 +52,8 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         categoryListView.layoutManager = layoutManager
         categoryListView.setHasFixedSize(true)
+
+//Lesson 06 creating our own onClickListener.
+
     }
 }
